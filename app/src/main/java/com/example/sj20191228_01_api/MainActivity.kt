@@ -21,7 +21,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
-        logOutBtn.setOnClickListener {
+        logoutBtn.setOnClickListener {
             val alert = AlertDialog.Builder(mContext)
 
             alert.setTitle("LogOut")
@@ -57,7 +57,7 @@ class MainActivity : BaseActivity() {
                     val userPhoneNum = user.getString("phone")
 
                     nameTxt.text = userName
-                    userPhoneNum.text = userPhoneNum
+                    phoneTxt.text = userPhoneNum
 
 
                 }else{
