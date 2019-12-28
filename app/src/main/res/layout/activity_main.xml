@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".MainActivity">
+    tools:context=".MyProfileActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,6 +34,19 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="폰번 나올 자리" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="아이디" />
+
+    <TextView
+        android:id="@+id/loginIdTxt"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="아이디 나올 자리" />
 
 
 

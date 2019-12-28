@@ -60,7 +60,7 @@ class LoginActivity : BaseActivity() {
 
                             ContextUtil.setUserToken(mContext,token)
 
-                            val intent= Intent(mContext, MainActivity::class.java)
+                            val intent= Intent(mContext, MyProfileActivity::class.java)
                             startActivity(intent)
                             finish()
 

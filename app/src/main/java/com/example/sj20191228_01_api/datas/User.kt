@@ -13,7 +13,7 @@ class User : Serializable {
     companion object {
         //        jsonObject를 기반으로 => User 변수로 변환 기능.
         fun getUserFromJson(json: JSONObject) {
-            val parsedUser =User()
+            val parsedUser = User()
 //            기본데이터 => json 변수에서 따온 값으로 대체
             parsedUser.id = json.getInt("id")
             parsedUser.loginId = json.getString("login_Id")
