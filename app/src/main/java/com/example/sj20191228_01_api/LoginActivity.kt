@@ -1,8 +1,11 @@
 package com.example.sj20191228_01_api
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import com.example.sj20191228_01_api.utils.ConnectServer
 import kotlinx.android.synthetic.main.activity_login.*
+import org.json.JSONObject
 
 class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +32,33 @@ class LoginActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
-            Toast.makeText(this, "정상입력이라 로그인이 시도 되어야 합니다.", Toast.LENGTH_SHORT).show()
+            val inputId = idEdt.text.toString()
+            val inputPw = pwEdt.text.toString()
 
+//            Toast.makeText(this, "정상입력이라 로그인이 시도 되어야 합니다.", Toast.LENGTH_SHORT).show()
+
+//            ConnectServer.postRequsetLogin(mContext, inputId, inputPw, object:ConnectServer.JsonResponseHandler{
+//                override fun onResponse(json: JSONObject) {
+//                    Log.d("서버응답 json", json.toString())
+//                }
+//
+//            })
+            ConnectServer.postRequestLogin(mContext, inputId, inputPw, object:ConnectServer.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+                    Log.d("서버응답 json", json.toString())
+//                    서버에서 돌려주는 code가 몇인지 "Int" 값 확인
+                    val code = json.getInt("code")
+
+                    runOnUiThread {
+                        if (code == 200){
+                            Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(mContext, "로그인 실패", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+            })
 
         }
     }

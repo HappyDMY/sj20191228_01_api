@@ -6,7 +6,7 @@ import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 
-class ConectServer {
+class ConnectServer {
     interface JsonResponseHandler {
         fun onResponse(json: JSONObject)
     }
@@ -44,7 +44,7 @@ class ConectServer {
 //                    json변수의 내용을 분석해서 상황에 따른 처리를 할 수 있음
 
                     handler?.onResponse(json)
-                    Log.d("서버연결 성공","성공")
+                    Log.d("서버연결 성공","연결성공")
                 }
 
             })
