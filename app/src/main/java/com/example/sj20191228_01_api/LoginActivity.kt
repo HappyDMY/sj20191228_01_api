@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.sj20191228_01_api.utils.ConnectServer
+import com.example.sj20191228_01_api.utils.ContextUtil
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 
@@ -52,8 +53,15 @@ class LoginActivity : BaseActivity() {
                     runOnUiThread {
                         if (code == 200){
                             Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT).show()
+                            val data = json.getJSONObject("data")
+                            val token = data.getString("token")
+                            //받아온 토큰을 내 폰에 반 영구적으로 저장
+
+                            ContextUtil.setUserToken(mContext,token)
+
                         } else {
-                            Toast.makeText(mContext, "로그인 실패", Toast.LENGTH_SHORT).show()
+                            val message = json.getString("message")
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
