@@ -50,5 +50,42 @@ class ConnectServer {
             })
         }
 
+        fun getRequestMyInfo(context: Context, jsonResponseHandler: JsonResponseHandler?){
+            val client = OkHttpClient()
+//            get방식에 맞는 URL 생성
+//            => 파라미터가 전부 주소에 노출 되도록 작성해야함.
+
+//            urlBuilder => 단계별로 가공해서 완성하는 개념 : Builder
+            val urlBuilder = HttpUrl.parse("${BASE_URL}/my_info")!!.newBuilder()
+//            urlBuilder.addEncodedQueryParameter("device_token", "")
+
+//            url빌더를 이용해 첨부된 파라미터를 활용해서 url String으로 저장
+            val url = urlBuilder.build().toString()
+
+            val request = Request.Builder()
+                .url(url)
+                .header("X-Http-Token", ContextUtil.getUserToken(context))
+//            get 방식은 제일 기본이 되는 API 통신방식 => 메소드를 별도로 명시 X
+                .build()
+
+            client.newCall(request).enqueue(object : Callback{
+                override fun onFailure(call: Call, e: IOException) {
+                    Log.d("서버연결 실패",e.localizedMessage)
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val body = response.body()!!.string() //서버에서 내려중 응답을 String으로 저장.
+                    val json = JSONObject(body) //String으로 저장된 응답을 JSON으로 가공처리
+//                    json변수의 내용을 분석해서 상황에 따른 처리를 할 수 있음
+
+                    jsonResponseHandler?.onResponse(json)
+                    Log.d("서버연결 성공","연결성공")
+                }
+
+            })
+
+
+        }
+
     }
 }
